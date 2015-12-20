@@ -1,0 +1,9 @@
+apply plugin: 'application'
+apply plugin: "java"
+
+mainClassName = "com.github.thejunkjon.junkirc.Main"
+
+dependencies {
+    compile project(':lib')
+    compile 'com.googlecode.lanterna:lanterna:2.1.9'
+}
