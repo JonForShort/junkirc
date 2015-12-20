@@ -1,4 +1,4 @@
-package com.junkirc.ui;
+package com.github.thejunkjon.junkirc.ui;
 
 import javax.swing.*;
 import java.awt.event.*;

@@ -1,4 +1,4 @@
-package com.junkirc.network;
+package com.github.thejunkjon.junkirc.network;
 
 import java.io.BufferedReader;
 import java.io.IOException;

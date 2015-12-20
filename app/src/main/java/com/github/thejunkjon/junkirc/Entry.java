@@ -1,9 +1,9 @@
-package com.junkirc;
+package com.github.thejunkjon.junkirc;
 
-import com.junkirc.network.Connection;
-import com.junkirc.network.ConnectionManager;
-import com.junkirc.ui.ChatWindowDialog;
-import com.junkirc.ui.ConnectDialog;
+import com.github.thejunkjon.junkirc.network.Connection;
+import com.github.thejunkjon.junkirc.network.ConnectionManager;
+import com.github.thejunkjon.junkirc.ui.ChatWindowDialog;
+import com.github.thejunkjon.junkirc.ui.ConnectDialog;
 
 import java.io.IOException;
 
@@ -17,7 +17,8 @@ public class Entry {
 
         if (!dialog.isClosedByCancel()) {
             try {
-                final Connection connection = ConnectionManager.INSTANCE.createConnection(dialog.getHost(), dialog.getPort(), dialog.getUser());
+                final Connection connection = ConnectionManager.INSTANCE.createConnection(
+                        dialog.getHost(), dialog.getPort(), dialog.getUser());
                 ChatWindowDialog chatWindowDialog = new ChatWindowDialog(connection);
                 chatWindowDialog.pack();
                 chatWindowDialog.setVisible(true);

@@ -1,6 +1,6 @@
-package com.junkirc.ui;
+package com.github.thejunkjon.junkirc.ui;
 
-import com.junkirc.network.Connection;
+import com.github.thejunkjon.junkirc.network.Connection;
 
 import javax.swing.*;
 import java.awt.event.*;
