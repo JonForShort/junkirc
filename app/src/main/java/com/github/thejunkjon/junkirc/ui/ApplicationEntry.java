@@ -10,16 +10,18 @@ import java.net.URL;
 
 public class ApplicationEntry extends Application {
 
-    public static void main(final String[] args) {
-        launch(args);
-    }
+    private static final String WINDOW_TITLE = "Connect";
+    private static final String FXML_CONNECT_DIALOG = "ConnectDialog.fxml";
 
-    @Override
     public void start(Stage primaryStage) throws Exception {
-        final URL connectDialogUrl = getClass().getResource("ConnectDialog.fxml");
-        final Parent root = FXMLLoader.load(connectDialogUrl);
-        primaryStage.setTitle("Connect");
-        primaryStage.setScene(new Scene(root, 300, 275));
+
+        final URL connectDialogFxmlUrl = getClass().getResource(FXML_CONNECT_DIALOG);
+        final Parent root = FXMLLoader.load(connectDialogFxmlUrl);
+        primaryStage.setTitle(WINDOW_TITLE);
+
+        final Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }
