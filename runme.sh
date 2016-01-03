@@ -1,3 +1,3 @@
 #! /bin/bash
-./gradlew clean build
-java -jar build/libs/junkirc.jar
+./gradlew clean installDist
+./app/build/install/app/bin/app

@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
 }
 
@@ -10,6 +10,6 @@ task wrapper(type: Wrapper) {
 
 allprojects {
     repositories {
-        mavenCentral()
+        jcenter()
     }
 }

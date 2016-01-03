@@ -1,7 +1,7 @@
-apply plugin: 'application'
 apply plugin: "java"
+apply plugin: "application"
 
-mainClassName = "com.github.thejunkjon.junkirc.Entry"
+mainClassName = "com.github.thejunkjon.junkirc.ui.ApplicationEntry"
 
 dependencies {
     compile project(':lib')
