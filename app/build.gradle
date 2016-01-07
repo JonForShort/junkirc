@@ -5,6 +5,7 @@ mainClassName = "com.github.thejunkjon.junkirc.ui.ApplicationEntry"
 
 dependencies {
     compile project(':lib')
+    compile "com.google.code.gson:gson:2.5"
     compile "org.slf4j:slf4j-api:1.7.13"
     compile "org.slf4j:slf4j-log4j12:1.7.13"
 }

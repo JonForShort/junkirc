@@ -1,0 +1,12 @@
+[
+  {
+    "name": "locahost",
+    "host": "localhost",
+    "port": 6697
+  },
+  {
+    "name": "Freenode",
+    "host": "irc.freenode.net",
+    "port": 6697
+  }
+]
