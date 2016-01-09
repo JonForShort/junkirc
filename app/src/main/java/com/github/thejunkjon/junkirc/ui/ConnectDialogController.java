@@ -2,31 +2,20 @@ package com.github.thejunkjon.junkirc.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 public class ConnectDialogController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConnectDialogController.class);
-    private static final String WINDOW_TITLE = "Connected";
 
     @FXML
     protected void handleConnect(final ActionEvent actionEvent) {
         LOGGER.trace("handleConnect");
-        final Stage stage = getStageFromActionEvent(actionEvent);
-        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
-        try {
-            stage.setTitle(WINDOW_TITLE);
-            stage.getScene().setRoot(fxmlLoader.load());
-            LOGGER.trace("loaded main window");
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage());
-        }
+        getStageFromActionEvent(actionEvent).close();
+        new MainWindow().show();
     }
 
     @FXML
