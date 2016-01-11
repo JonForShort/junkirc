@@ -8,4 +8,8 @@ public class ApplicationEntry extends Application {
     public void start(Stage primaryStage) throws Exception {
         new ConnectDialog(primaryStage).show();
     }
+
+    public static void main(final String[] args) {
+        launch(args);
+    }
 }

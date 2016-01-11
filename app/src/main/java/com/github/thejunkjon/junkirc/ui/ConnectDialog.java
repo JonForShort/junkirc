@@ -24,11 +24,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.thejunkjon.junkirc.utils.ResourceUtils.getResource;
+import static com.github.thejunkjon.junkirc.utils.ResourceUtils.getResourceAsStream;
+
 final class ConnectDialog {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConnectDialog.class);
     private static final String WINDOW_TITLE = "Connect To IRC Server";
-    private static final String FXML_CONNECT_DIALOG = "ConnectDialog.fxml";
+    private static final String FXML_CONNECT_DIALOG = "fxml/dialog/ConnectDialog.fxml";
+    private static final String CONFIG_DEFAULT_IRC_SERVERS_JSON = "config/defaultIrcServers.json";
     private final Stage stage;
 
     ConnectDialog(final Stage stage) {
@@ -36,7 +40,7 @@ final class ConnectDialog {
     }
 
     void show() throws IOException {
-        final URL connectDialogFxmlUrl = getClass().getResource(FXML_CONNECT_DIALOG);
+        final URL connectDialogFxmlUrl = getResource(FXML_CONNECT_DIALOG);
         final Parent root = FXMLLoader.load(connectDialogFxmlUrl);
         stage.setTitle(WINDOW_TITLE);
 
@@ -83,7 +87,7 @@ final class ConnectDialog {
     public List<IrcServerConfiguration> getConfigurationsForIrcServers() {
         final List<IrcServerConfiguration> configurationsForIrcServers = new ArrayList<>();
         try (final InputStream defaultIrcServerJsonFileStream =
-                     ApplicationEntry.class.getClassLoader().getResourceAsStream("defaultIrcServers.json")) {
+                     getResourceAsStream(CONFIG_DEFAULT_IRC_SERVERS_JSON)) {
             final Type listType = new TypeToken<ArrayList<IrcServerConfiguration>>() {
             }.getType();
             configurationsForIrcServers.addAll(

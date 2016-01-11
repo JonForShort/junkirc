@@ -8,19 +8,22 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+import static com.github.thejunkjon.junkirc.utils.ResourceUtils.getResource;
+
 final class MainWindow {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainWindow.class);
     private static final String WINDOW_TITLE = "Connected";
+    private static final String FXML_WINDOW_MAIN_WINDOW_FXML = "fxml/window/MainWindow.fxml";
 
     public void show() {
         final Stage stage = new Stage();
-        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+        final FXMLLoader fxmlLoader = new FXMLLoader(getResource(FXML_WINDOW_MAIN_WINDOW_FXML));
         try {
             stage.setTitle(WINDOW_TITLE);
             stage.setScene(new Scene(fxmlLoader.load()));
             stage.show();
-            LOGGER.trace("loaded main window");
+            LOGGER.trace("loaded main fxml.window");
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }

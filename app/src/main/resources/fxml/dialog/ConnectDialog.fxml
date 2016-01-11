@@ -45,7 +45,7 @@
               </GridPane>
           </children>
           <stylesheets>
-              <URL value="@Base.css" />
+              <URL value="@../../css/base.css" />
           </stylesheets>
       </VBox>
       <ListView prefHeight="200.0" prefWidth="346.0" fx:id="ircServersList"/>
