@@ -1,7 +1,10 @@
 apply plugin: 'application'
-apply plugin: "java"
+apply plugin: 'java'
 
 mainClassName = "com.github.thejunkjon.junkirc.Main"
+
+sourceCompatibility = rootProject.ext.JAVA_SOURCE_COMPATIBILITY
+targetCompatibility = rootProject.ext.JAVA_SOURCE_COMPATIBILITY
 
 dependencies {
     compile project(':lib')

@@ -1,4 +1,7 @@
-apply plugin: "java"
+apply plugin: 'java'
+
+sourceCompatibility = rootProject.ext.JAVA_SOURCE_COMPATIBILITY
+targetCompatibility = rootProject.ext.JAVA_SOURCE_COMPATIBILITY
 
 dependencies {
     testCompile "junit:junit:4.6"

@@ -13,3 +13,7 @@ allprojects {
         jcenter()
     }
 }
+
+ext {
+    JAVA_SOURCE_COMPATIBILITY = JavaVersion.VERSION_1_8
+}
