@@ -3,9 +3,8 @@ package com.github.thejunkjon.junkirc.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +15,11 @@ import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public final class MainWindowController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MainWindow.class);
-    private final List<String> commandHistoryQueue = new ArrayList<>(0);
-    private ListIterator<String> commandHistoryIterator = commandHistoryQueue.listIterator();
+    private final List<String> commandHistory = new ArrayList<>(0);
+    private ListIterator<String> commandHistoryIterator = commandHistory.listIterator();
 
     @FXML
-    private TextArea commandsText;
+    private TextField commandsText;
 
     @FXML
     private TextArea chatText;
@@ -31,39 +29,42 @@ public final class MainWindowController {
 
     @FXML
     public void onCommandKeyPressed(final KeyEvent keyEvent) {
-        LOGGER.debug(keyEvent.getText());
         if (KEY_PRESSED.equals(keyEvent.getEventType())) {
             if (ENTER.equals(keyEvent.getCode())) {
-                addCurrentCommandBufferToHistory();
-                resetCommandBuffer();
+                addCurrentCommandToHistory();
+                resetCommandTextArea();
                 keyEvent.consume();
             } else if (UP.equals(keyEvent.getCode()) || KP_UP.equals(keyEvent.getCode())) {
-                cycleThroughBufferUp();
+                cycleUpInCommandHistory();
             } else if (DOWN.equals(keyEvent.getCode()) || KP_DOWN.equals(keyEvent.getCode())) {
-                cycleThroughBufferDown();
+                cycleDownInCommandHistory();
             }
         }
     }
 
-    private void cycleThroughBufferUp() {
+    private void addCurrentCommandToHistory() {
+        final String currentCommandText = commandsText.getText();
+        commandHistory.add(currentCommandText);
+        commandHistoryIterator = commandHistory.listIterator(commandHistory.size());
+    }
+
+    private void cycleUpInCommandHistory() {
         if (commandHistoryIterator.hasPrevious()) {
             commandsText.setText(commandHistoryIterator.previous());
+        } else {
+            resetCommandTextArea();
         }
     }
 
-    private void cycleThroughBufferDown() {
+    private void cycleDownInCommandHistory() {
         if (commandHistoryIterator.hasNext()) {
             commandsText.setText(commandHistoryIterator.next());
+        } else {
+            resetCommandTextArea();
         }
     }
 
-    private void resetCommandBuffer() {
+    private void resetCommandTextArea() {
         commandsText.clear();
-    }
-
-    private void addCurrentCommandBufferToHistory() {
-        final String currentCommandText = commandsText.getText();
-        commandHistoryQueue.add(currentCommandText);
-        commandHistoryIterator = commandHistoryQueue.listIterator(commandHistoryQueue.size() - 1);
     }
 }

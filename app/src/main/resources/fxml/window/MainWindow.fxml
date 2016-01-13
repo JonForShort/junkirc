@@ -27,10 +27,12 @@
                 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
                             minWidth="-Infinity">
                     <children>
-                        <TextArea fx:id="commandsText" onKeyPressed="#onCommandKeyPressed" maxHeight="1.7976931348623157E308"
-                                  maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                  AnchorPane.topAnchor="0.0"/>
+                        <TextField fx:id="commandsText" onKeyPressed="#onCommandKeyPressed"
+                                   maxHeight="1.7976931348623157E308"
+                                   maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0"
+                                   AnchorPane.topAnchor="0.0"/>
                     </children>
                 </AnchorPane>
             </items>

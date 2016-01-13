@@ -25,7 +25,7 @@ final class MainWindow {
             stage.show();
             LOGGER.trace("loaded main fxml.window");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 }
