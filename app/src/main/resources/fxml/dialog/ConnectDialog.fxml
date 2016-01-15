@@ -7,9 +7,9 @@
 <?import java.net.URL?>
 
 
-<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.thejunkjon.junkirc.ui.ConnectDialogController">
+<HBox styleClass="rootPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.thejunkjon.junkirc.ui.ConnectDialogController">
    <children>
-      <VBox>
+      <VBox styleClass="rootPane">
           <children>
               <GridPane layoutX="5.0" layoutY="5.0">
                   <columnConstraints>
@@ -22,12 +22,12 @@
                       <RowConstraints maxHeight="267.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                      <Label text="Server:" />
+                      <Label text="Host:" />
                       <Label text="Port:" GridPane.rowIndex="1" />
                       <TextField GridPane.columnIndex="1" fx:id="host"/>
                       <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="port"/>
-                      <Label text="Username:" GridPane.rowIndex="2" />
-                      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                      <Label text="Nickname:" GridPane.rowIndex="2" />
+                      <TextField fx:id="nickname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   </children>
               </GridPane>
               <GridPane layoutX="5.0" layoutY="140.0">

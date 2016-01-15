@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<VBox maxHeight="1.7976931348623157E308" fx:controller="com.github.thejunkjon.junkirc.ui.MainWindowController"
-      maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <SplitPane dividerPositions="0.8618090452261307" maxHeight="1.7976931348623157E308"
-                   maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL"
-                   VBox.vgrow="ALWAYS">
-            <items>
-                <SplitPane dividerPositions="0.13523131672597866" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                           AnchorPane.topAnchor="0.0">
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <ListView fx:id="userList" layoutX="-55.0" layoutY="51.0" maxHeight="1.7976931348623157E308"
-                                  maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                  AnchorPane.topAnchor="0.0"/>
-                        <TextArea fx:id="chatText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                  minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0"
-                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                        <MenuItem mnemonicParsing="false" text="Close" />
                     </items>
-                </SplitPane>
-                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
-                            minWidth="-Infinity">
-                    <children>
-                        <TextField fx:id="commandsText" onKeyPressed="#onCommandKeyPressed"
-                                   maxHeight="1.7976931348623157E308"
-                                   maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                   AnchorPane.rightAnchor="0.0"
-                                   AnchorPane.topAnchor="0.0"/>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="SELECTED_TAB" />
     </children>
 </VBox>

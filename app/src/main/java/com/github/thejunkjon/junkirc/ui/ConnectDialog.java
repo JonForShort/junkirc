@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,7 @@ final class ConnectDialog {
     private static final String WINDOW_TITLE = "Connect To IRC Server";
     private static final String FXML_CONNECT_DIALOG = "fxml/dialog/ConnectDialog.fxml";
     private static final String CONFIG_DEFAULT_IRC_SERVERS_JSON = "config/defaultIrcServers.json";
+    private final FXMLLoader fxmlLoader = new FXMLLoader(getResource(FXML_CONNECT_DIALOG));
     private final Stage stage;
 
     ConnectDialog(final Stage stage) {
@@ -40,8 +40,7 @@ final class ConnectDialog {
     }
 
     void show() throws IOException {
-        final URL connectDialogFxmlUrl = getResource(FXML_CONNECT_DIALOG);
-        final Parent root = FXMLLoader.load(connectDialogFxmlUrl);
+        final Parent root = fxmlLoader.load();
         stage.setTitle(WINDOW_TITLE);
 
         final Scene scene = new Scene(root);
