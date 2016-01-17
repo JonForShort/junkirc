@@ -1,7 +1,6 @@
 package com.github.thejunkjon.junkirc.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
@@ -13,52 +12,68 @@ import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 class UserInputParser {
 
-    private final List<String> commandHistory = new ArrayList<>(0);
-    private ListIterator<String> commandHistoryIterator = commandHistory.listIterator();
-    private final TextField userInput;
+    private final List<String> inputHistory = new ArrayList<>(0);
+    private final OnUserInputListener onUserInputListener;
+    private final OnUserInputCompletedListener onUserInputCompletedListener;
+    private ListIterator<String> inputHistoryIterator = inputHistory.listIterator();
 
-    UserInputParser(final TextField userInput) {
-        this.userInput = userInput;
+    UserInputParser(final OnUserInputCompletedListener onUserInputCompletedListener,
+                    final OnUserInputListener onUserInputListener) {
+        this.onUserInputCompletedListener = onUserInputCompletedListener;
+        this.onUserInputListener = onUserInputListener;
+    }
+
+    interface OnUserInputCompletedListener {
+        void onUserInputCompleted(final String userInput);
+    }
+
+    interface OnUserInputListener {
+        String getUserInput();
+
+        void setUserInput(final String newInput);
+
+        void clearUserInput();
     }
 
     @FXML
     public void onKeyPressed(final KeyEvent keyEvent) {
         if (KEY_PRESSED.equals(keyEvent.getEventType())) {
             if (ENTER.equals(keyEvent.getCode())) {
-                addCurrentCommandToHistory();
+                final String completedUserInput = onUserInputListener.getUserInput();
+                addInputToHistory(completedUserInput);
                 resetCommandTextArea();
                 keyEvent.consume();
+                onUserInputCompletedListener.onUserInputCompleted(completedUserInput);
             } else if (UP.equals(keyEvent.getCode()) || KP_UP.equals(keyEvent.getCode())) {
-                cycleUpInCommandHistory();
+                cycleUpInInputHistory();
             } else if (DOWN.equals(keyEvent.getCode()) || KP_DOWN.equals(keyEvent.getCode())) {
-                cycleDownInCommandHistory();
+                cycleDownInInputHistory();
             }
         }
     }
 
-    private void addCurrentCommandToHistory() {
-        final String currentCommandText = userInput.getText();
-        commandHistory.add(currentCommandText);
-        commandHistoryIterator = commandHistory.listIterator(commandHistory.size());
+    private void addInputToHistory(final String completedInput) {
+        inputHistory.add(completedInput);
+        inputHistoryIterator = inputHistory.listIterator(inputHistory.size());
     }
 
-    private void cycleUpInCommandHistory() {
-        if (commandHistoryIterator.hasPrevious()) {
-            userInput.setText(commandHistoryIterator.previous());
+    private void cycleUpInInputHistory() {
+        if (inputHistoryIterator.hasPrevious()) {
+            onUserInputListener.setUserInput(inputHistoryIterator.previous());
         } else {
             resetCommandTextArea();
         }
     }
 
-    private void cycleDownInCommandHistory() {
-        if (commandHistoryIterator.hasNext()) {
-            userInput.setText(commandHistoryIterator.next());
+    private void cycleDownInInputHistory() {
+        if (inputHistoryIterator.hasNext()) {
+            onUserInputListener.setUserInput(inputHistoryIterator.next());
         } else {
             resetCommandTextArea();
         }
     }
 
     private void resetCommandTextArea() {
-        userInput.clear();
+        onUserInputListener.clearUserInput();
     }
 }

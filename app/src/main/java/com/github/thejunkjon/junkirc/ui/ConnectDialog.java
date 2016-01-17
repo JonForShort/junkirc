@@ -1,6 +1,6 @@
 package com.github.thejunkjon.junkirc.ui;
 
-import com.github.thejunkjon.junkirc.model.IrcServerConfiguration;
+import com.github.thejunkjon.junkirc.model.ServerConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.beans.value.ChangeListener;
@@ -50,12 +50,12 @@ final class ConnectDialog {
         stage.show();
     }
 
-    private void buildIrcServersList(Scene scene) {
+    private void buildIrcServersList(final Scene scene) {
         final ListView<String> listView = (ListView<String>) scene.lookup("#ircServersList");
-        final List<IrcServerConfiguration> configurationsForIrcServers = getConfigurationsForIrcServers();
+        final List<ServerConfiguration> configurationsForIrcServers = getConfigurationsForIrcServers();
         final ObservableList<String> observableList = FXCollections.observableArrayList();
-        for (final IrcServerConfiguration ircServerConfiguration : configurationsForIrcServers) {
-            observableList.add(ircServerConfiguration.name);
+        for (final ServerConfiguration serverConfiguration : configurationsForIrcServers) {
+            observableList.add(serverConfiguration.name);
         }
 
         listView.setItems(observableList);
@@ -66,28 +66,28 @@ final class ConnectDialog {
                                         final String newValue) {
                         final TextField host = (TextField) scene.lookup("#host");
                         final TextField port = (TextField) scene.lookup("#port");
-                        final IrcServerConfiguration ircServerConfiguration =
+                        final ServerConfiguration serverConfiguration =
                                 getMatchingIrcServerConfigurationFor(newValue);
-                        host.setText(ircServerConfiguration.host);
-                        port.setText(String.valueOf(ircServerConfiguration.port));
+                        host.setText(serverConfiguration.host);
+                        port.setText(String.valueOf(serverConfiguration.port));
                     }
 
-                    private IrcServerConfiguration getMatchingIrcServerConfigurationFor(String newValue) {
-                        for (IrcServerConfiguration ircServerConfiguration : configurationsForIrcServers) {
-                            if (ircServerConfiguration.name.equals(newValue)) {
-                                return ircServerConfiguration;
+                    private ServerConfiguration getMatchingIrcServerConfigurationFor(String newValue) {
+                        for (ServerConfiguration serverConfiguration : configurationsForIrcServers) {
+                            if (serverConfiguration.name.equals(newValue)) {
+                                return serverConfiguration;
                             }
                         }
-                        return new IrcServerConfiguration();
+                        return new ServerConfiguration();
                     }
                 });
     }
 
-    public List<IrcServerConfiguration> getConfigurationsForIrcServers() {
-        final List<IrcServerConfiguration> configurationsForIrcServers = new ArrayList<>();
+    public List<ServerConfiguration> getConfigurationsForIrcServers() {
+        final List<ServerConfiguration> configurationsForIrcServers = new ArrayList<>();
         try (final InputStream defaultIrcServerJsonFileStream =
                      getResourceAsStream(CONFIG_DEFAULT_IRC_SERVERS_JSON)) {
-            final Type listType = new TypeToken<ArrayList<IrcServerConfiguration>>() {
+            final Type listType = new TypeToken<ArrayList<ServerConfiguration>>() {
             }.getType();
             configurationsForIrcServers.addAll(
                     new Gson().fromJson(new InputStreamReader(defaultIrcServerJsonFileStream, "UTF-8"), listType));

@@ -9,4 +9,5 @@ targetCompatibility = rootProject.ext.JAVA_SOURCE_COMPATIBILITY
 dependencies {
     compile project(':lib')
     compile 'com.googlecode.lanterna:lanterna:2.1.9'
+    compile 'commons-cli:commons-cli:1.3.1'
 }

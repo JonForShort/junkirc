@@ -6,73 +6,55 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class Connection implements AutoCloseable {
+class Connection {
 
-    private final String mUser;
-    private final int mPort;
-    private final String mHost;
+    private final String server;
+    private final int port;
+    private final ReadRunner readRunner = new ReadRunner();
 
-    private final Socket mSocket;
-    private final OutputStream mWriter;
-    private final BufferedReader mReader;
+    private Socket socket;
+    private OutputStream writer;
+    private BufferedReader reader;
 
-    private final Thread mReaderThread;
-    private final ReadRunner mReadRunner = new ReadRunner();
-
-    private volatile OnDataAvailableListener mListener = new OnDataAvailableListener() {
-        @Override
-        public void onDataAvailable(byte[] data) {
-            // do nothing.
-        }
+    private volatile OnDataAvailableListener mListener = data -> {
     };
 
-    public interface OnDataAvailableListener {
+    interface OnDataAvailableListener {
         void onDataAvailable(final byte[] data);
     }
 
-    public Connection(String host, int port, String user) throws IOException {
-        mHost = host;
-        mUser = user;
-        mPort = port;
-
-        mSocket = new Socket(mHost, port);
-        mWriter = mSocket.getOutputStream();
-        mReader = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
-
-        mReaderThread = new Thread(mReadRunner);
-        mReaderThread.start();
-    }
-
-    public String getHost() {
-        return mHost;
-    }
-
-    public int getPort() {
-        return mPort;
-    }
-
-    public String getUser() {
-        return mUser;
-    }
-
-    public void setOnDataAvailableListener(final OnDataAvailableListener listener) {
+    protected void setOnDataAvailableListener(final OnDataAvailableListener listener) {
         mListener = listener;
     }
 
-    @Override
-    public void close() throws Exception {
-        mReadRunner.stop();
+    Connection(final String server, final int port) {
+        this.server = server;
+        this.port = port;
+    }
+
+    protected void open() throws IOException {
+        socket = new Socket(server, port);
+        writer = socket.getOutputStream();
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        final Thread readerThread = new Thread(readRunner);
+        readerThread.start();
+    }
+
+    protected void close() throws IOException {
+        readRunner.stop();
         closeConnectionObjects();
     }
 
     private void closeConnectionObjects() throws IOException {
-        mWriter.close();
-        mReader.close();
-        mSocket.close();
+        writer.close();
+        reader.close();
+        socket.close();
     }
 
-    public void write(final byte[] data) throws IOException {
-        mWriter.write(data);
+    protected void write(final byte[] data) throws IOException {
+        writer.write(data);
+        writer.flush();
     }
 
     private class ReadRunner implements Runnable {
@@ -87,7 +69,7 @@ public class Connection implements AutoCloseable {
         public void run() {
             while (mContinueToRun) {
                 try {
-                    final String line = mReader.readLine();
+                    final String line = reader.readLine();
                     if (line == null) {
                         break;
                     }

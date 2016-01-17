@@ -1,20 +1,14 @@
 package com.github.thejunkjon.junkirc.ui;
 
-import com.github.thejunkjon.junkirc.network.Connection;
-import com.github.thejunkjon.junkirc.network.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class ConnectDialogController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectDialogController.class);
 
     @FXML
     private TextField nickname;
@@ -26,24 +20,13 @@ public class ConnectDialogController {
     private TextField port;
 
     @FXML
-    protected void handleConnect(final ActionEvent actionEvent) {
-        LOGGER.trace("handleConnect");
+    protected void handleConnect(final ActionEvent actionEvent) throws IOException {
         getStageFromActionEvent(actionEvent).close();
-        final MainWindow mainWindow = new MainWindow();
-        mainWindow.show();
-
-        try {
-            final Connection connection = ConnectionManager.INSTANCE.createConnection(host.getText(),
-                    Integer.parseInt(port.getText()), nickname.getText());
-            mainWindow.addServerCommunicationPane(connection);
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+        new MainWindow().show(host.getText(), Integer.parseInt(port.getText()));
     }
 
     @FXML
     protected void handleCancel(final ActionEvent actionEvent) {
-        LOGGER.trace("handleCancel");
         getStageFromActionEvent(actionEvent).close();
     }
 
