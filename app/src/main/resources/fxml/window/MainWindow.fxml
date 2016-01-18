@@ -3,13 +3,13 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane styleClass="rootPane" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8"
+<BorderPane styleClass="rootPane" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.github.thejunkjon.junkirc.ui.MainWindowController">
     <bottom>
         <TextField fx:id="userInput" onKeyPressed="#onKeyPressed"/>
     </bottom>
     <center>
-        <TextArea fx:id="content" BorderPane.alignment="CENTER"/>
+        <TextArea fx:id="content"/>
     </center>
 </BorderPane>

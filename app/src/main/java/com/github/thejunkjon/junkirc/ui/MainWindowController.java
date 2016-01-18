@@ -1,6 +1,8 @@
 package com.github.thejunkjon.junkirc.ui;
 
 import com.github.thejunkjon.junkirc.network.InternetRelayChatConnection;
+import com.github.thejunkjon.junkirc.network.InternetRelayChatConnection.OnMessageReceivedListener;
+import com.github.thejunkjon.junkirc.ui.UserInputParser.OnUserInputCompletedListener;
 import com.github.thejunkjon.junkirc.ui.UserInputParser.OnUserInputListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -11,7 +13,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public final class MainWindowController implements OnUserInputListener, UserInputParser.OnUserInputCompletedListener, InternetRelayChatConnection.OnMessageReceivedListener {
+public final class MainWindowController implements OnUserInputListener,
+        OnUserInputCompletedListener,
+        OnMessageReceivedListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainWindowController.class);
 
@@ -60,6 +64,6 @@ public final class MainWindowController implements OnUserInputListener, UserInpu
 
     @Override
     public void onMessageReceived(final String message) {
-        content.appendText(message + "\n");
+        javafx.application.Platform.runLater(() -> content.appendText(message + "\n"));
     }
 }

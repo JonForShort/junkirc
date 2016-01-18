@@ -6,48 +6,44 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-
 <HBox styleClass="rootPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.thejunkjon.junkirc.ui.ConnectDialogController">
-   <children>
-      <VBox styleClass="rootPane">
-          <children>
-              <GridPane layoutX="5.0" layoutY="5.0">
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="100" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="100" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="271.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="267.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                      <Label text="Host:" />
-                      <Label text="Port:" GridPane.rowIndex="1" />
-                      <TextField GridPane.columnIndex="1" fx:id="host"/>
-                      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="port"/>
-                      <Label text="Nickname:" GridPane.rowIndex="2" />
-                      <TextField fx:id="nickname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  </children>
-              </GridPane>
-              <GridPane layoutX="5.0" layoutY="140.0">
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                      <Button mnemonicParsing="false" onAction="#handleConnect" prefHeight="26.0" prefWidth="299.0" text="Connect" />
-                      <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="26.0" prefWidth="325.0" text="Cancel" GridPane.columnIndex="1" />
-                  </children>
-              </GridPane>
-          </children>
-          <stylesheets>
-              <URL value="@../../css/base.css" />
-          </stylesheets>
-      </VBox>
-      <ListView prefHeight="200.0" prefWidth="346.0" fx:id="ircServersList"/>
-   </children>
+    <children>
+        <VBox styleClass="rootPane">
+            <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                      <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="47.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="153.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="271.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="271.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                          <children>
+                              <Label text="Host:" />
+                              <Label text="Port:" GridPane.rowIndex="1" />
+                              <TextField fx:id="host" GridPane.columnIndex="1" />
+                              <TextField fx:id="port" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                          </children>
+                      </GridPane>
+               </center>
+               <bottom>
+                  <HBox>
+                     <children>
+                              <Button onAction="#handleConnect" prefHeight="26.0" prefWidth="87.0" text="Connect" />
+                              <Button onAction="#handleCancel" prefHeight="26.0" prefWidth="113.0" text="Cancel" GridPane.columnIndex="1" />
+                     </children>
+                  </HBox>
+               </bottom>
+            </BorderPane>
+            </children>
+            <stylesheets>
+                <URL value="@../../css/base.css" />
+            </stylesheets>
+        </VBox>
+        <ListView fx:id="ircServersList" prefHeight="200.0" prefWidth="346.0" />
+    </children>
 </HBox>
